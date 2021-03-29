@@ -7,10 +7,10 @@
                 <draggable class="list-group"  :list="list1" group="people" @change="log" v-bind="dragOptions">
                     <div
                             class="list-group-item"
-                            v-for="(element, index) in list1"
+                            v-for="(element) in list1"
                             :key="element.name"
                     >
-                        {{ element.name }} {{ index }}
+                        {{ element.name }} {{ element.id }}
                     </div>
                 </draggable>
             </el-col>
@@ -20,23 +20,18 @@
                 <draggable class="list-group" :list="list2" group="people" @change="log" v-bind="dragOptions">
                     <div
                             class="list-group-item"
-                            v-for="(element, index) in list2"
+                            v-for="element in list2"
                             :key="element.name"
                     >
-                        {{ element.name }} {{ index }}
+                        {{ element.name }} {{ element.id }}
                     </div>
                 </draggable>
             </el-col>
-
-            <rawDisplayer :value="list1" title="List 1"/>
-
-            <rawDisplayer :value="list2" title="List 2"/>
         </el-row>
     </div>
 </template>
 <script>
   import draggable from 'vuedraggable'
-  import rawDisplayer from './raw-displayer'
 
   export default {
     name: 'two-lists',
@@ -44,7 +39,6 @@
     order: 1,
     components: {
       draggable,
-      rawDisplayer,
     },
     data () {
       return {
@@ -91,19 +85,6 @@
   }
 </script>
 <style>
-    .button {
-        margin-top: 35px;
-    }
-    .flip-list-move {
-        transition: transform 0.5s;
-    }
-    .no-move {
-        transition: transform 0s;
-    }
-    .ghost {
-        opacity: 0.5;
-        background: #c8ebfb;
-    }
     .list-group {
         min-height: 20px;
     }

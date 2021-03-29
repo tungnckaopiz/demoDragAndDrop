@@ -21,17 +21,12 @@
                 </div>
             </draggable>
         </el-col>
-
-        <el-col :span="6">
-            <rawDisplayer :value="list" title="List" />
-        </el-col>
     </el-row>
 </template>
 
 <script>
   let id = 2;
   import draggable from "vuedraggable";
-  import rawDisplayer from './raw-displayer'
   export default {
     name: "handle",
     display: "Handle",
@@ -39,7 +34,6 @@
     order: 5,
     components: {
       draggable,
-      rawDisplayer
     },
     data() {
       return {
@@ -76,9 +70,6 @@
   };
 </script>
 <style scoped>
-    .button {
-        margin-top: 35px;
-    }
     .handle {
         float: left;
         padding-top: 8px;
