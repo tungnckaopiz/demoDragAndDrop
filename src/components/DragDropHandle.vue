@@ -20,8 +20,6 @@
                     <i class="el-icon-delete" @click="removeAt(idx)"></i>
                 </div>
             </draggable>
-            <input type="text" v-model="message">
-            <p>Thông điệp bị đảo ngược: "{{ reversedMessage }}"</p>
         </el-col>
 
         <el-col :span="6">
@@ -33,13 +31,15 @@
 <script>
   let id = 2;
   import draggable from "vuedraggable";
+  import rawDisplayer from './raw-displayer'
   export default {
     name: "handle",
     display: "Handle",
     instruction: "Drag using the handle icon",
     order: 5,
     components: {
-      draggable
+      draggable,
+      rawDisplayer
     },
     data() {
       return {
@@ -49,7 +49,6 @@
           { name: "Jean", text: "", id: 2 }
         ],
         dragging: false,
-        message: 'người đông bến đợi thuyền xuôi ngược'
       };
     },
     computed: {
@@ -64,10 +63,6 @@
           ghostClass: "ghost"
         };
       },
-      reversedMessage: function () {
-        // `this` trỏ tới đối tượng vm
-        return this.message.split(' ').reverse().join(' ')
-      }
     },
     methods: {
       removeAt(idx) {

@@ -36,13 +36,15 @@
 </template>
 <script>
   import draggable from 'vuedraggable'
+  import rawDisplayer from './raw-displayer'
 
   export default {
     name: 'two-lists',
     display: 'Transitions',
     order: 1,
     components: {
-      draggable
+      draggable,
+      rawDisplayer,
     },
     data () {
       return {

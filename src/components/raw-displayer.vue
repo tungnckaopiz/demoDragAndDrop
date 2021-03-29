@@ -1,8 +1,5 @@
 <template>
-    <div>
-        <h3>{{ title }}</h3>
-        <pre>{{ valueString }}</pre>
-    </div>
+   <div></div>
 </template>
 <script>
   const props = {
