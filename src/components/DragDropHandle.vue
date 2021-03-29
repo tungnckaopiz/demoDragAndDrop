@@ -9,12 +9,10 @@
 
             <draggable tag="ul" :list="list" class="list-group" handle=".handle" v-bind="dragOptions">
                 <li
-                        class="list-group-item"
+                        class="list-group-item handle"
                         v-for="(element, idx) in list"
                         :key="element.name"
                 >
-                    <b-icon icon="border-width" class="handle"></b-icon>
-
                     <span class="text">{{ idx + 1 }} </span>
 
                     <input type="text" class="form-control" v-model="element.text" />
@@ -46,7 +44,7 @@
           { name: "Joao", text: "", id: 1 },
           { name: "Jean", text: "", id: 2 }
         ],
-        dragging: true
+        dragging: false
       };
     },
     computed: {
