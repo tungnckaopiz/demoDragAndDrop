@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <DragDropTwoList></DragDropTwoList>
+    <DragDropHandle></DragDropHandle>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import DragDropTwoList from './components/DragDropTwoList'
+import DragDropHandle from './components/DragDropHandle'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    DragDropTwoList,
+    DragDropHandle
   }
 }
 </script>
