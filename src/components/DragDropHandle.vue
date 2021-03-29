@@ -1,15 +1,15 @@
 <template>
-    <div class="row">
-        <div class="col-1">
-            <button class="btn btn-secondary button" @click="add">Add</button>
-        </div>
+    <el-row>
+        <el-col :span="4">
+            <el-button type="success" @click="add">Add</el-button>
+        </el-col>
 
-        <div class="col-7">
+        <el-col :span="14">
             <h3>Draggable {{ draggingInfo }}</h3>
 
-            <draggable tag="ul" :list="list" class="list-group" handle=".handle" v-bind="dragOptions">
-                <li
-                        class="list-group-item handle"
+            <draggable :list="list" class="list-group" handle=".handle" v-bind="dragOptions">
+                <div
+                        class="handle"
                         v-for="(element, idx) in list"
                         :key="element.name"
                 >
@@ -17,13 +17,17 @@
 
                     <input type="text" class="form-control" v-model="element.text" />
 
-                    <b-icon icon="x-circle" @click="removeAt(idx)"></b-icon>
-                </li>
+                    <i class="el-icon-delete" @click="removeAt(idx)"></i>
+                </div>
             </draggable>
-        </div>
+            <input type="text" v-model="message">
+            <p>Thông điệp bị đảo ngược: "{{ reversedMessage }}"</p>
+        </el-col>
 
-        <rawDisplayer class="col-3" :value="list" title="List" />
-    </div>
+        <el-col :span="6">
+            <rawDisplayer :value="list" title="List" />
+        </el-col>
+    </el-row>
 </template>
 
 <script>
@@ -44,7 +48,8 @@
           { name: "Joao", text: "", id: 1 },
           { name: "Jean", text: "", id: 2 }
         ],
-        dragging: false
+        dragging: false,
+        message: 'người đông bến đợi thuyền xuôi ngược'
       };
     },
     computed: {
@@ -58,6 +63,10 @@
           disabled: false,
           ghostClass: "ghost"
         };
+      },
+      reversedMessage: function () {
+        // `this` trỏ tới đối tượng vm
+        return this.message.split(' ').reverse().join(' ')
       }
     },
     methods: {
@@ -80,16 +89,18 @@
         padding-top: 8px;
         padding-bottom: 8px;
     }
-    .close {
-        float: right;
-        padding-top: 8px;
-        padding-bottom: 8px;
-    }
     input {
         display: inline-block;
         width: 50%;
     }
     .text {
         margin: 20px;
+    }
+    .list-group {
+        display: inline-grid;
+        background: #ecf5ff;
+    }
+    .list-group div {
+        cursor: pointer;
     }
 </style>

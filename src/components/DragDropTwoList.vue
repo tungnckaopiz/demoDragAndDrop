@@ -1,10 +1,10 @@
 <template>
     <div class="container">
         <h1>Two List</h1>
-        <div class="row">
-            <div class="col-3">
+        <el-row>
+            <el-col :span="6">
                 <h3>Draggable 1</h3>
-                <draggable class="list-group" :list="list1" group="people" @change="log" v-bind="dragOptions">
+                <draggable class="list-group"  :list="list1" group="people" @change="log" v-bind="dragOptions">
                     <div
                             class="list-group-item"
                             v-for="(element, index) in list1"
@@ -13,9 +13,9 @@
                         {{ element.name }} {{ index }}
                     </div>
                 </draggable>
-            </div>
+            </el-col>
 
-            <div class="col-3">
+            <el-col :span="6">
                 <h3>Draggable 2</h3>
                 <draggable class="list-group" :list="list2" group="people" @change="log" v-bind="dragOptions">
                     <div
@@ -26,12 +26,12 @@
                         {{ element.name }} {{ index }}
                     </div>
                 </draggable>
-            </div>
+            </el-col>
 
-            <rawDisplayer class="col-3" :value="list1" title="List 1"/>
+            <rawDisplayer :value="list1" title="List 1"/>
 
-            <rawDisplayer class="col-3" :value="list2" title="List 2"/>
-        </div>
+            <rawDisplayer :value="list2" title="List 2"/>
+        </el-row>
     </div>
 </template>
 <script>
