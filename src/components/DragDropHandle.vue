@@ -11,7 +11,7 @@
                 <div
                         class="handle"
                         v-for="(element, idx) in list"
-                        :key="element.name"
+                        :key="element.id"
                 >
                     <span class="text">{{ idx + 1 }} </span>
 
@@ -38,9 +38,9 @@
     data() {
       return {
         list: [
-          { name: "John", text: "", id: 0 },
-          { name: "Joao", text: "", id: 1 },
-          { name: "Jean", text: "", id: 2 }
+          { text: "", id: 1 },
+          { text: "", id: 2 },
+          { text: "", id: 3 }
         ],
         dragging: false,
       };
