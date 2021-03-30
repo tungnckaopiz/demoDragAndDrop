@@ -1,32 +1,38 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <DragDropTwoList></DragDropTwoList>
-    <hr>
-    <DragDropHandle></DragDropHandle>
-  </div>
+    <div id="app">
+        <el-container class="display-block">
+            <Header></Header>
+            <el-container>
+                <Aside></Aside>
+                <el-container class="display-block">
+                    <DragDropHandle></DragDropHandle>
+                    <Footer></Footer>
+                </el-container>
+            </el-container>
+        </el-container>
+    </div>
 </template>
 
 <script>
-import DragDropTwoList from './components/DragDropTwoList'
-import DragDropHandle from './components/DragDropHandle'
 
-export default {
-  name: 'App',
-  components: {
-    DragDropTwoList,
-    DragDropHandle
+  // import DragDropTwoList from '@/components/DragDropTwoList'
+  import DragDropHandle from '@/components/DragDropHandle'
+  import Header from '@/components/Header'
+  import Footer from '@/components/Footer'
+  import Aside from '@/components/Aside'
+
+  export default {
+    name: 'App',
+    components: {
+      // DragDropTwoList,
+      DragDropHandle,
+      Header,
+      Footer,
+      Aside
+    }
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style type="text/css">
+    @import './assets/styles/main.css';
 </style>

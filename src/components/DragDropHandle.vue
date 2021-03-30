@@ -1,92 +1,189 @@
 <template>
-    <el-row>
-        <el-col :span="4">
-            <el-button type="success" @click="add">Add</el-button>
-        </el-col>
+    <el-container class="p30 content display-grid">
+        <div class="title">お知らせタグ設定</div>
+        <div>
+            <el-row class="form-list">
+                <el-col :span="24" class="list-content">
+                    <div class="list">
+                        <div class="header-cell">
+                            <p class="text">#</p>
+                            <p>名前</p>
+                            <p>削除</p>
+                        </div>
+                        <draggable :list="list" class="list-group" handle=".handle" v-bind="dragOptions">
+                            <div
+                                    class="handle"
+                                    v-for="(element, idx) in list"
+                                    :key="element.id"
+                            >
+                                <p class="text">{{ idx + 1 }} </p>
 
-        <el-col :span="14">
-            <h3>Draggable {{ draggingInfo }}</h3>
+                                <el-input type="text" class="form-control" v-model="element.text"/>
 
-            <draggable :list="list" class="list-group" handle=".handle" v-bind="dragOptions">
-                <div
-                        class="handle"
-                        v-for="(element, idx) in list"
-                        :key="element.id"
-                >
-                    <span class="text">{{ idx + 1 }} </span>
-
-                    <input type="text" class="form-control" v-model="element.text" />
-
-                    <i class="el-icon-delete" @click="removeAt(idx)"></i>
-                </div>
-            </draggable>
-        </el-col>
-    </el-row>
+                                <i class="el-icon-delete" @click="removeAt(idx)"></i>
+                            </div>
+                        </draggable>
+                    </div>
+                    <el-row>
+                        <el-col :span="12">
+                            <span @click="add" class="add-tag">
+                                +イベントを作成
+                            </span>
+                        </el-col>
+                        <el-col :span="12">
+                            <button>
+                                保存
+                            </button>
+                        </el-col>
+                    </el-row>
+                </el-col>
+            </el-row>
+        </div>
+    </el-container>
 </template>
 
-<script>
-  let id = 2;
-  import draggable from "vuedraggable";
-  export default {
-    name: "handle",
-    display: "Handle",
-    instruction: "Drag using the handle icon",
-    order: 5,
-    components: {
-      draggable,
-    },
-    data() {
-      return {
-        list: [
-          { text: "", id: 1 },
-          { text: "", id: 2 },
-          { text: "", id: 3 }
-        ],
-        dragging: false,
-      };
-    },
-    computed: {
-      draggingInfo() {
-        return this.dragging ? "under drag" : "";
-      },
-      dragOptions() {
-        return {
-          animation: 200,
-          group: "description",
-          disabled: false,
-          ghostClass: "ghost"
-        };
-      },
-    },
-    methods: {
-      removeAt(idx) {
-        this.list.splice(idx, 1);
-      },
-      add () {
-        id++;
-        this.list.push({ name: "Juan " + id, id, text: "" });
-      }
-    }
-  };
-</script>
 <style scoped>
     .handle {
         float: left;
-        padding-top: 8px;
-        padding-bottom: 8px;
+        border: 1px solid #DFE0EB;
+        box-sizing: border-box;
+        display: inline-flex;
     }
+
     input {
         display: inline-block;
         width: 50%;
     }
-    .text {
-        margin: 20px;
+
+    p.text {
+        float: left;
+        padding-right: 82px;
+        padding-left: 32px;
     }
+
+    input.text {
+        position: absolute;
+        background: #FFFFFF;
+        border: 1px solid #FFC000;
+        box-sizing: border-box;
+        border-radius: 8px;
+    }
+
     .list-group {
         display: inline-grid;
-        background: #ecf5ff;
+        background: #ffffff;
+        width: 100%;
     }
-    .list-group div {
+
+    .list-group .handle {
+        cursor: pointer;
+        max-height: 70px;
+        padding: 14px;
+    }
+
+    .header-cell {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 18.75px;
+        color: #4F4F4F;
+        width: 100%;
+        min-height: 56px;
+        display: inline-flex;
+        margin-right: 15px;
+        background: rgba(223, 224, 235, 0.3);
+        border: 1px solid #DFE0EB;
+        box-sizing: border-box;
+        border-radius: 12px 12px 0px 0px;
+    }
+
+    .text {
+        place-self: center;
+        padding-left: 15px;
+    }
+
+    .el-icon-delete {
+        place-self: center;
+        padding-left: 115px;
+        padding-right: 46px;
+    }
+
+    .form-list {
+        background: #FFFFFF;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+    }
+
+    .display-grid {
+        display: grid;
+    }
+
+    .title {
+        padding-bottom: 24px;
+        justify-self: left;
+    }
+    .list-content .list {
+        padding:40px;
+    }
+    .add-tag {
+        color: #2D9CDB;
+        font-size: 14px;
+        font-weight: 700;
+        float: left;
+        padding-left: 40px;
         cursor: pointer;
     }
+    button {
+        background: #FFC000;
+        border-radius: 8px;
+        border: 2px solid #FFC000 ;
+        width: 108px;
+        height: 48px;
+        float: right;
+        margin-right: 40px;
+        margin-bottom: 30px;
+        font-weight: 700;
+    }
 </style>
+<script>
+  let id = 2
+  import draggable from 'vuedraggable'
+
+  export default {
+    name: 'handle',
+    display: 'Handle',
+    order: 5,
+    components: {
+      draggable,
+    },
+    data () {
+      return {
+        list: [
+          { text: '生徒向け1', id: 1 },
+          { text: '生徒向け2', id: 2 },
+          { text: '生徒向け3', id: 3 },
+          { text: '生徒向け4', id: 4 }
+        ],
+        dragging: false,
+      }
+    },
+    computed: {
+      dragOptions () {
+        return {
+          animation: 200,
+          group: 'description',
+          disabled: false,
+          ghostClass: 'ghost'
+        }
+      },
+    },
+    methods: {
+      removeAt (idx) {
+        this.list.splice(idx, 1)
+      },
+      add () {
+        id++
+        this.list.push({ name: 'Juan ' + id, id, text: '' })
+      }
+    }
+  }
+</script>
