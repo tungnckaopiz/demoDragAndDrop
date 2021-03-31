@@ -213,7 +213,7 @@
         } else {
           this.$message({
             type: 'error',
-            message: 'This tag used !'
+            message: 'This tag is using !'
           })
         }
       }
