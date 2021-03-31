@@ -18,16 +18,16 @@
                             >
                                 <p class="text">{{ idx + 1 }} </p>
 
-                                <el-input type="text" class="form-control" v-model="element.text"/>
-
-                                <i class="el-icon-delete" @click="removeAt(idx)"></i>
+                                <el-input type="text" class="form-control" v-model="element.text" maxlength="50"
+                                          show-word-limit/>
+                                <i class="el-icon-delete" @click="confirmDelete(element.id)"></i>
                             </div>
                         </draggable>
                     </div>
                     <el-row>
                         <el-col :span="12">
                             <span @click="add" class="add-tag">
-                                +イベントを作成
+                                +タグを追加
                             </span>
                         </el-col>
                         <el-col :span="12">
@@ -121,9 +121,11 @@
         padding-bottom: 24px;
         justify-self: left;
     }
+
     .list-content .list {
-        padding:40px;
+        padding: 40px;
     }
+
     .add-tag {
         color: #2D9CDB;
         font-size: 14px;
@@ -132,10 +134,11 @@
         padding-left: 40px;
         cursor: pointer;
     }
+
     button {
         background: #FFC000;
         border-radius: 8px;
-        border: 2px solid #FFC000 ;
+        border: 2px solid #FFC000;
         width: 108px;
         height: 48px;
         float: right;
@@ -158,10 +161,10 @@
     data () {
       return {
         list: [
-          { text: '生徒向け1', id: 1 },
-          { text: '生徒向け2', id: 2 },
-          { text: '生徒向け3', id: 3 },
-          { text: '生徒向け4', id: 4 }
+          { text: '生徒向け1', id: 1, canDelete: true },
+          { text: '生徒向け2', id: 2, canDelete: true },
+          { text: '生徒向け3', id: 3, canDelete: true },
+          { text: '生徒向け4', id: 4, canDelete: false }
         ],
         dragging: false,
       }
@@ -177,12 +180,42 @@
       },
     },
     methods: {
-      removeAt (idx) {
+      removeTag (idx) {
         this.list.splice(idx, 1)
       },
       add () {
         id++
         this.list.push({ name: 'Juan ' + id, id, text: '' })
+      },
+      confirmDelete (idx) {
+        if (this.list.length < 2) {
+          this.$message({
+            type: 'error',
+            message: 'List tag is not null'
+          })
+        } else if (this.list.find(object => object.id === idx && object.canDelete)) {
+          this.$confirm('This will permanently delete the tag. Continue?', 'Warning', {
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel',
+            type: 'warning'
+          }).then(() => {
+            this.removeTag(idx)
+            this.$message({
+              type: 'success',
+              message: 'Delete completed'
+            })
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: 'Delete canceled'
+            })
+          })
+        } else {
+          this.$message({
+            type: 'error',
+            message: 'This tag used !'
+          })
+        }
       }
     }
   }
